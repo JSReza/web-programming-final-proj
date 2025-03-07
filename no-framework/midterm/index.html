@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<header>
+    <div id="navbar">
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <strong>Fitness Tracker</strong>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                        <a class="navbar-item" href="login.html"><strong>Login</strong></a>
+                        <a class="navbar-item">Register</a>
+                        <a class="navbar-item">Logout</a>
+                </div>
+            </div>
+        </nav>
+</header>
+<body>
+    
+    <div class="section" v-if="currentUser">
+            <div class="container">
+                <!-- User Profile Section -->
+                <div class="columns">
+                    <div class="column is-3">
+                        <div class="box">
+                    <h3 class="title is-4">Welcome, {{ currentUser.name }}</h3>
+                     <p>Role: {{ currentUser.role }}</p>
+                        </div>
+                    </div>
+            
+                    <!-- Activity Section -->
+                    <div class="column is-6">
+                        <div class="box">
+                            <div class="level">
+                                <div class="level-left">
+                                    <h3 class="title is-4">My Activities</h3>
+                                </div>
+                                <div class="level-right">
+                                    <button class="button is-info" @click="showAddActivityModal = true">
+                                        Add Activity
+                                    </button>
+                                </div>
+                            </div>
+
+                             <!-- Activities List -->
+                             <div class="activities-list">
+                                <div v-for="activity in userActivities" :key="activity.id" class="box">
+                                    <div class="level">
+                                        <div class="level-left">
+                                            <div>
+                                                <p class="is-size-5">{{ activity.type }}</p>
+                                                <p>Duration: {{ activity.duration }}</p>
+                                                <p>Date: {{ activity.date }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="level-right">
+                                            <button class="button is-small is-info" @click="editActivity(activity)">Edit</button>
+                                            <button class="button is-small is-danger" @click="deleteActivity(activity.id)">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="box">
+                            <h3 class="title">Friends' Activities</h3>
+                            <div v-for="friend in friends" :key="friend.id" class="box">
+                                <p class="is-size-5">{{ friend.name }}</p>
+                                <div v-for="activity in friend.activities" :key="activity.id" class="mt-2">
+                                    <p>{{ activity.type }} - {{ activity.duration }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="isAdmin" class="box mt-5">
+                    <h3 class="title is-4">Admin Panel</h3>
+                    <div class="tabs">
+                        <ul>
+                            <li :class="{'is-active': adminTab === 'users'}">
+                                <a @click="adminTab = 'users'">Manage Users</a>
+                            </li>
+                            <li :class="{'is-active': adminTab === 'activities'}">
+                                <a @click="adminTab = 'activities'">All Activities</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div v-if="adminTab === 'users'" class="content">
+                        <button class="button is-info mb-3" @click="showAddUserModal = true">Add User</button>
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in users" :key="user.id">
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.role }}</td>
+                                    <td>
+                                        <button class="button is-small is-info mr-2" @click="editUser(user)">Edit</button>
+                                        <button class="button is-small is-danger" @click="deleteUser(user.id)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                currentUser: null,
+                userActivities: [],
+                friends: [],
+                users: [
+                    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'user' },
+                    { id: 2, name: 'Admin User', email: 'admin@example.com', role: 'admin' }
+                ],
+                adminTab: 'users',
+                showAddActivityModal: false,
+                showAddUserModal: false,
+                isAdmin: false
+            }
+        },
+        methods: {
+            logout() {
+                this.currentUser = null
+                window.location.href = 'login.html'
+            },
+            editActivity(activity) {
+                // Implement activity editing logic
+                console.log('Editing activity:', activity)
+            },
+            deleteActivity(id) {
+                this.userActivities = this.userActivities.filter(activity => activity.id !== id)
+            },
+            editUser(user) {
+                // Implement user editing logic
+                console.log('Editing user:', user)
+            },
+            deleteUser(id) {
+                this.users = this.users.filter(user => user.id !== id)
+            },
+            addUser() {
+                // Implement add user logic
+                this.showAddUserModal = true
+            },
+            addActivity() {
+                // Implement add activity logic
+                this.showAddActivityModal = true
+            }
+        },
+        mounted() {
+            // Simulating a logged-in user for testing
+            this.currentUser = {
+                id: 1,
+                name: 'John Doe',
+                role: 'admin'
+            }
+            this.isAdmin = this.currentUser.role === 'admin'
+
+                // Sample activities data
+                this.userActivities = [
+                    { id: 1, type: 'Running', duration: '30 minutes', date: '2025-03-03' },
+                    { id: 2, type: 'Cycling', duration: '45 minutes', date: '2025-03-02' }
+                ]
+
+                // Sample friends data
+                this.friends = [
+                    {
+                        id: 1,
+                        name: 'Jane Smith',
+                        activities: [
+                            { id: 1, type: 'Yoga', duration: '60 minutes' }
+                        ]
+                    }
+                ]
+            }
+        }).mount('#app')
+    </script>
+</html>
