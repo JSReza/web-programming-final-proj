@@ -20,21 +20,12 @@
             </div>
           </div>
   
-          <!-- Friend's Activities -->
           <div class="pl-5">
-            <div v-if="!friend.activities.length" class="has-text-grey">
-              No activities yet
-            </div>
+            <div v-if="!friend.activities.length" class="has-text-grey">No activities yet</div>
   
-            <div 
-              v-for="activity in friend.activities" 
-              :key="activity.id" 
-              class="box has-background-light"
-            >
+            <div v-for="activity in friend.activities" :key="activity.id" class="box has-background-light">
               <div class="content">
-                <p class="is-size-5 has-text-weight-medium">
-                  {{ activity.type }}
-                </p>
+                <p class="is-size-5 has-text-weight-medium">{{ activity.type }}</p>
                 <div class="tags">
                   <span class="tag is-info">
                     <span class="icon">
@@ -57,7 +48,7 @@
     </div>
   </template>
   
-  <script setup lang="ts">
+<script setup lang="ts">
 import { ref } from 'vue'
 
 interface Activity {
@@ -88,6 +79,9 @@ const formatDate = (date: string) => {
 </script>
   
   <style scoped>
+    h3{
+    color:darkseagreen;
+  }
   .friends-activities {
     max-height: 700px;
     overflow-y: auto;

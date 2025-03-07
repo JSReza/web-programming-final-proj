@@ -38,7 +38,7 @@
                :key="activity.id" >
               <div class="content">
                 <strong>{{ activity.type }}</strong>
-                <p class="is-size-7">Duration: {{ activity.duration }}</p>
+                <p class="is-size-7">Duration: {{ activity.duration }} minutes</p>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
   
   const props = defineProps<{
     activities: Activity[]
-  }>()
+    }>()
   
  
   const workoutsThisWeek = computed(() => {
@@ -108,33 +108,9 @@
   </script>
   
   <style scoped>
-  .timeline {
-    margin-left: 1rem;
-    padding: 1rem 0;
+    h3,h4,.heading{
+    color:darkseagreen;
   }
-  
-  .timeline-item {
-    display: flex;
-    margin-bottom: 2rem;
-    position: relative;
-  }
-  
-  .timeline-marker {
-    position: absolute;
-    left: -1.5rem;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #00d1b2;
-    border: 2px solid white;
-  }
-  
-  .timeline-content {
-    padding-left: 1rem;
-    border-left: 2px solid #dbdbdb;
-    min-height: 40px;
-  }
-  
   .notification {
     transition: transform 0.2s ease;
   }
