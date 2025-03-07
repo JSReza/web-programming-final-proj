@@ -95,9 +95,7 @@ const friends = ref([
 </template>
 
 <style scoped>
-  h1,h2,h3{
-    color:darkseagreen;
-  }
+
   .main-content {
     margin-top: 2rem;
   }
