@@ -4,7 +4,7 @@
           <span>Your Workout Statistics</span>
       </h3>
 
-      <div class="columns is-multiline mb-4">
+      <div class="column mb-4">
         <div class="column is-6">
           <div class="notification is-primary">
             <p class="heading">Total Workouts</p>

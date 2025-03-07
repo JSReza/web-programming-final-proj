@@ -1,20 +1,20 @@
 <template>
     <div class="box">
       <h3 class="title is-4 has-text-centered is-danger">
-     
        <span>Friends' Activities</span>
       </h3>
 
       <div class="friends-activities">
-        <div v-if="!filteredFriends.length" class="has-text-centered my-6">
+        <div v-if="!friends.length" class="has-text-centered my-6">
           <p class="is-size-5 has-text-grey">No friends found</p>
         </div>
   
-        <div v-for="friend in filteredFriends" :key="friend.id" class="friend-section mb-5">
+        <div v-for="friend in friends" :key="friend.id" class="friend-section mb-5">
           <div class="friend-header level is-mobile mb-2">
             <div class="level-left">
               <div class="level-item">
-
+                <figure class="image is-48x48">
+                </figure>
                 <span class="ml-3 has-text-weight-semibold">{{ friend.name }}</span>
               </div>
             </div>
@@ -35,10 +35,19 @@
                 <p class="is-size-5 has-text-weight-medium">
                   {{ activity.type }}
                 </p>
-                <div class="info">
+                <div class="tags">
+                  <span class="tag is-info">
+                    <span class="icon">
+                      <i class="fas fa-clock"></i>
+                    </span>
                     <span>{{ activity.duration }}</span>
-                    <br/>
+                  </span>
+                  <span class="tag is-success">
+                    <span class="icon">
+                      <i class="fas fa-calendar"></i>
+                    </span>
                     <span>{{ formatDate(activity.date) }}</span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -49,42 +58,34 @@
   </template>
   
   <script setup lang="ts">
-  import { ref, computed } from 'vue'
-  
-  interface Activity {
-    id: number
-    type: string
-    duration: string
-    date: string
-  }
-  
-  interface Friend {
-    id: number
-    name: string
-    avatar?: string
-    activities: Activity[]
-  }
-  
-  const props = defineProps<{
-    friends: Friend[]
-  }>()
-  
-  const searchQuery = ref('')
-  
-  const filteredFriends = computed(() => {
-    return props.friends.filter(friend => 
-      friend.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    )
+import { ref } from 'vue'
+
+interface Activity {
+  id: number
+  type: string
+  duration: string
+  date: string
+}
+
+interface Friend {
+  id: number
+  name: string
+  avatar?: string
+  activities: Activity[]
+}
+
+const props = defineProps<{
+  friends: Friend[]
+}>()
+
+const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
   })
-  
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    })
-  }
-  </script>
+}
+</script>
   
   <style scoped>
   .friends-activities {
@@ -123,7 +124,8 @@
   }
   
   .friend-header:hover {
-    background-color: #f5f5f5;
+    background-color: grey;
+    color: black;
   }
   
   .box.has-background-light {
