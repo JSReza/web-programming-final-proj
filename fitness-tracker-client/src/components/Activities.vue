@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,  defineProps, defineEmits, computed  } from 'vue'
 
 interface Activity {
   id: number
@@ -34,6 +34,7 @@ const saveWorkout = () => {
   newActivity.value.duration = ''
   newActivity.value.date = new Date().toISOString().slice(0, 10)
 }
+
 </script>
 
 <template>
