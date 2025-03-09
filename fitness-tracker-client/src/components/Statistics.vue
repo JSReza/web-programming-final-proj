@@ -114,11 +114,7 @@
   .notification {
     transition: transform 0.2s ease;
   }
-  
-  .notification:hover {
-    transform: translateY(-5px);
-  }
-  
+
   .heading {
     text-transform: uppercase;
     font-size: 0.8rem;

@@ -98,7 +98,5 @@ const saveWorkout = () => {
   transition: transform 0.2s ease;
 }
 
-.box:hover {
-  transform: translateY(-2px);
-}
+
 </style>

@@ -87,48 +87,19 @@ const formatDate = (date: string) => {
     overflow-y: auto;
     padding-right: 1rem;
   }
-  
-  .friends-activities::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .friends-activities::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-  }
-  
-  .friends-activities::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-  }
-  
+
   .friend-section {
     border-bottom: 1px solid #dbdbdb;
     padding-bottom: 1rem;
   }
   
-  .friend-section:last-child {
-    border-bottom: none;
-  }
-  
+
   .friend-header {
     transition: background-color 0.2s ease;
     padding: 0.5rem;
     border-radius: 6px;
   }
   
-  .friend-header:hover {
-    background-color: grey;
-    color: black;
-  }
-  
-  .box.has-background-light {
-    transition: transform 0.2s ease;
-  }
-  
-  .box.has-background-light:hover {
-    transform: translateX(5px);
-  }
   
   .tags {
     margin-top: 0.5rem;
