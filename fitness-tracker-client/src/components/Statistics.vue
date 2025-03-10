@@ -4,32 +4,29 @@
           <span>Your Workout Statistics</span>
       </h3>
 
-      <div class="column mb-4">
-        <div class="column is-6">
-          <div class="notification is-primary">
-            <p class="heading">Total Workouts</p>
-            <p class="title">{{ activities.length }}</p>
-          </div>
+      <div class="stats-container">
+      <div class="notification-grid">
+        <div class="notification">
+          <p class="heading">Total Workouts</p>
+          <p class="title">{{ activities.length }}</p>
         </div>
-        <div class="column is-6">
-          <div class="notification is-info">
-            <p class="heading">This Week</p>
-            <p class="title">{{ workoutsThisWeek }}</p>
-          </div>
+        
+        <div class="notification">
+          <p class="heading">This Week</p>
+          <p class="title">{{ workoutsThisWeek }}</p>
         </div>
-        <div class="column is-6">
-          <div class="notification is-success">
-            <p class="heading">Most Common Workout</p>
-            <p class="title is-5">{{ mostFrequentWorkout }}</p>
-          </div>
+        
+        <div class="notification">
+          <p class="heading">Most Common Workout</p>
+          <p class="title is-5">{{ mostFrequentWorkout }}</p>
         </div>
-        <div class="column is-6">
-          <div class="notification is-warning">
-            <p class="heading">Total Time</p>
-            <p class="title is-5">{{ totalWorkoutTime }}</p>
-          </div>
+        
+        <div class="notification">
+          <p class="heading">Total Time</p>
+          <p class="title is-5">{{ totalWorkoutTime }}</p>
         </div>
       </div>
+    </div>
   
       <div class="recent-activities">
         <h4 class="title is-5 mb-4">Recent Activities</h4>
@@ -111,9 +108,6 @@
     h3,h4,.heading{
     color:darkseagreen;
   }
-  .notification {
-    transition: transform 0.2s ease;
-  }
 
   .heading {
     text-transform: uppercase;
@@ -122,13 +116,29 @@
     letter-spacing: 0.1em;
   }
   
-  @media screen and (max-width: 768px) {
-    .columns {
-      margin: 0;
-    }
-    
-    .column {
-      padding: 0.5rem;
-    }
+  .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.notification {
+  width: 100%;
+
+  margin-bottom: 0 !important;
+  transition: transform 0.2s ease;
+}
+
+.notification:hover {
+  transform: translateY(-5px);
+}
+
+@media screen and (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
   }
+}
   </style>
