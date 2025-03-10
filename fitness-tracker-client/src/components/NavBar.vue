@@ -14,16 +14,16 @@ const handleLogout = () => {
 
 </script>
 <template>
-  <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
 
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons are-medium">
-            <button class="button is-light ml-4">
+            <button class="button ml-4">
         <strong>Fitness Tracker</strong>
     </button>
-          <button class="button is-light ml-4" @click="handleLogout">
+          <button class="button ml-4" @click="handleLogout">
             <span class="icon">
               <i class="fas fa-sign-out-alt"></i>
             </span>

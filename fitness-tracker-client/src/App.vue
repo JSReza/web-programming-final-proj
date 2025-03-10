@@ -95,22 +95,39 @@ const friends = ref([
 </template>
 
 <style scoped>
+.main-content {
+  margin-top: 2rem;
+  padding: 0 2rem;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.section {
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 768px) {
   .main-content {
-    margin-top: 2rem;
+    padding: 0 1rem;
   }
-
+  
   .sections {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr;
   }
-
-  .section {
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-  }
-
+}
 </style>
