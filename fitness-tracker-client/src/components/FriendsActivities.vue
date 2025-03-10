@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-      <h3 class="title is-4 has-text-centered is-danger">
+      <h3 class="title is-4 has-text-centered ">
        <span>Friends' Activities</span>
       </h3>
 
@@ -13,27 +13,25 @@
           <div class="friend-header level is-mobile mb-2">
             <div class="level-left">
               <div class="level-item">
-                <figure class="image is-48x48">
-                </figure>
-                <span class="ml-3 has-text-weight-semibold">{{ friend.name }}</span>
+                <span class="ml-3 has-text-weight-semibold has-text-centered ">{{ friend.name }}</span>
               </div>
             </div>
           </div>
   
           <div class="pl-5">
-            <div v-if="!friend.activities.length" class="has-text-grey">No activities yet</div>
+            <div v-if="!friend.activities.length" >No activities yet</div>
   
-            <div v-for="activity in friend.activities" :key="activity.id" class="box has-background-light">
+            <div v-for="activity in friend.activities" :key="activity.id" class="box">
               <div class="content">
                 <p class="is-size-5 has-text-weight-medium">{{ activity.type }}</p>
                 <div class="tags">
-                  <span class="tag is-info">
+                  <span class="tag">
                     <span class="icon">
                       <i class="fas fa-clock"></i>
                     </span>
                     <span>{{ activity.duration }}</span>
                   </span>
-                  <span class="tag is-success">
+                  <span class="tag">
                     <span class="icon">
                       <i class="fas fa-calendar"></i>
                     </span>
