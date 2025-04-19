@@ -1,0 +1,40 @@
+{
+    "friends": [
+      {
+        "id": 1,
+        "name": "Kendrick Lamar",
+        "activities": [
+          {
+            "id": 1,
+            "type": "Calisthenics",
+            "duration": "30 minutes",
+            "date": "2025-02-12"
+          },
+          {
+            "id": 2,
+            "type": "Yoga",
+            "duration": "45 minutes",
+            "date": "2025-03-06"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Billie Eilish",
+        "activities": [
+          {
+            "id": 1,
+            "type": "Boxing",
+            "duration": "30 minutes",
+            "date": "2025-03-03"
+          },
+          {
+            "id": 2,
+            "type": "Weight lifting",
+            "duration": "30 minutes",
+            "date": "2025-03-02"
+          }
+        ]
+      }
+    ]
+  }
