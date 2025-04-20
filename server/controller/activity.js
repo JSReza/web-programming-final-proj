@@ -1,44 +1,47 @@
 const express = require('express');
 const router = express.Router();
+const model = require('../models/activity');
 
 router
     .get('/', (req, res) => {
-        res.send([
-            { id: 1, type: 'Activity 1', duration: 30, date: '2025-01-01' },
-            { id: 2, type: 'Activity 2', duration: 30, date: '2025-01-01' },
-            { id: 3, type: 'Activity 3', duration: 30, date: '2025-01-01' }
-        ])
+        model.getActivities().then((data) => {
+            res.send(data)
+        }).catch((err) => {
+            res.status(500).send({ error: 'Failed to fetch activities' });
+        })
 })
 .get('/:id', (req, res) => {
     const { id } = req.params;
-    res.send({ id, type: 'Activity 1', duration: 30, date: '2025-01-01' })
+    model.getActivity(id).then((data) => {
+        res.send(data)
+    }).catch((err) => {
+        res.status(404).send({ error: 'Activity not found' });
+    })
 })
 .post('/', (req, res) => {
-    const { type, duration, date } = req.body;
-    
-        res.send({
-            id: 1,
-            type,
-            duration,
-            date
-        })
+    const newData = req.body;
+    model.createActivity(newData).then((data) => {
+        res.status(201).send(data)
+    }).catch((err) => {
+        res.status(400).send({ error: 'Failed to create activity' });
+    })
 })
 .patch('/:id', (req, res) => {
     const { id } = req.params
-    const { type, duration, date } = req.body;
-
-    res.send({
-        id,
-        type,
-        duration,
-        date
+    const newData = req.body;
+    model.updateActivity(id, newData).then((data) => {
+        res.send(data)
+    }).catch((err) => {
+        res.status(404).send({ error: 'Activity not found' });
     })
+
 })
 .delete('/:id', (req, res) => {
     const { id } = req.params
-
-    res.send({
-        message: `Product ${id} deleted`
+    model.deleteActivity(id).then((data) => {
+        res.send(data)
+    }).catch((err) => {
+        res.status(404).send({ error: 'Activity not found' });
     })
 })
 module.exports = router

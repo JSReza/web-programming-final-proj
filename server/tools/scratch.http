@@ -2,5 +2,5 @@
 ###
     GET https://www.google.com
 ###
-    GET https://www.google.com/robots.txt
+    GET https://www.google.com/
 ###
