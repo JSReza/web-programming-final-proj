@@ -1,0 +1,27 @@
+{
+    "name": "web-server-final-proj-1",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server/index.js",
+        "dev": "nodemon server/index.js --watch server",
+        "build:fitness-tracker-client": "npm run build --prefix fitness-tracker-client",
+        "build": "npm run build fitness-tracker-client"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "jsonwebtoken": "^9.0.0",
+        "@supabase/supabase-js": "^2.49.4",
+        "buefy": "npm:@ntohq/buefy-next@^0.2.0",
+        "dayjs": "1.11.13",
+        "dotenv": "^16.4.7",
+        "express": "5.1.0",
+        "vue-router": "^4.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.22",
+        "@types/vue-router": "^2.0.0"
+    }
+}

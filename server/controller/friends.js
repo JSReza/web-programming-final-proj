@@ -1,21 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const model = require('../models/friends');
-router
-    .get('/', (req, res, next) => {
-        model.getFriends().then((data) => {
-            res.send(data)
-        }).catch(next)
-
-    })
-    .get('/:id', (req, res, next) => {
+const db = require('../db');
+router.get('/', async (req, res, next) => {
+    try {
+        const result = await db.query('SELECT * FROM friends');
+        res.json(result.rows);
+    } catch (err) {
+        next(err);
+    }
+    });
+    router.get('/:id/activities', async (req, res, next) => {
+        try {
+            const result = await db.query(
+                'SELECT * FROM friend_activities WHERE friend_id = $1 ORDER BY date DESC',
+                [req.params.id]
+            );
+            res.json(result.rows);
+        } catch (err) {
+            next(err);
+        }
+    });
+    router.get('/:id', (req, res, next) => {
         const { id } = req.params
         model.getFriend(id).then((data) => {
             res.send(data)
         }).catch(next)
 
     })
-    .post('/', (req,res, next) => {
+    router.post('/', (req,res, next) => {
         const newData = req.body;
         model.createFriend(newData).then((data) => {
             res.send(data)

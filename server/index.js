@@ -1,12 +1,12 @@
 const express = require('express')
 const activityController = require('./controller/activity');
-const friendController = require('./controller/friend');
-const cors = require('cors');
-const PORT = 8000
+const friendController = require('./controller/friends');
+const PORT = process.env.PORT ?? 8000
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+require('dotenv').config()
 
 app.use('/api/v1/activities', activityController);
 app.use('/api/v1/friends', friendController);
