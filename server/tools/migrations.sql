@@ -43,3 +43,9 @@ INSERT INTO friends (name) VALUES
 INSERT INTO friend_activities (friend_id, type, duration, date) VALUES
 (1, 'Boxing', 30, '2025-03-03 10:00:00'),
 (1, 'Weight lifting', 30, '2025-03-02 15:00:00');
+
+-- The following SQL statements are used to allow aggregate functions in PostgREST
+ ALTER ROLE authenticator
+ SET pgrst.db_aggregates_enabled = 'true';
+ NOTIFY pgrst,
+ 'reload config';

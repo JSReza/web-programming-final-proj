@@ -62,5 +62,21 @@ router.delete('/:id', async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+    router.get('/search/:query', (req, res, next) => {
+        const { query } = req.params
+
+        model.search(query).then((data) => {
+            res.send(data)
+        }).catch(next)
+
+    })
+    router.post('/seed', (req, res, next) => {
+        const { data } = req.body
+
+        model.seed(data).then((data) => {
+            res.status(201).send(data)
+        }).catch(next)
+    })
+
 });
 module.exports = router

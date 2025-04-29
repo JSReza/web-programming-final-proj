@@ -45,3 +45,6 @@ Content-Type: application/json
 
 ### Get friend's activities
 GET http://localhost:8000/api/v1/friends/1/activities
+
+###
+ POST http://localhost:8000/api/v1/products/seed

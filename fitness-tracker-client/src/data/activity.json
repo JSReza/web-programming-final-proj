@@ -1,0 +1,23 @@
+
+    {
+        "activities": [
+          {
+            "id": 1,
+            "type": "Weight Lifting",
+            "duration": "60",
+            "date": "2025-03-06T10:00:00"
+          },
+          {
+            "id": 2,
+            "type": "Running",
+            "duration": "45",
+            "date": "2025-03-07T09:00:00"
+          },
+          {
+            "id": 3,
+            "type": "Swimming",
+            "duration": "30",
+            "date": "2025-03-08T15:30:00"
+          }
+        ]
+      }

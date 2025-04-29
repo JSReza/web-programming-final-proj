@@ -6,6 +6,8 @@ import Statistics from './components/Statistics.vue'
 import Activities from './components/Activities.vue';
 //import ActivityList from './components/ActivityList.vue';
 import FriendsActivities from './components/FriendsActivities.vue';
+import activitiesData from './data/friends.json';
+import friendsData from './data/friends.json';
 
 interface Activity {
   id: number
@@ -15,14 +17,9 @@ interface Activity {
 }
 
 const currentUser = ref(null)
-const userActivities = ref<Activity[]>([
-  {
-    id: 1,
-    type: 'Weight Lifting',
-    duration: '60',
-    date: '2025-03-06T10:00:00'
-  }
-])
+
+const userActivities = ref<Activity[]>(activitiesData.friends[0].activities)
+const friends = ref(friendsData.friends)
 
 const handleActivityAdded = (newActivity: Activity) => {
   userActivities.value.push(newActivity)
@@ -31,45 +28,7 @@ const handleActivityAdded = (newActivity: Activity) => {
 const handleActivityDeleted = (id: number) => {
   userActivities.value = userActivities.value.filter(activity => activity.id !== id)
 }
-const friends = ref([
-  {
-    id: 1,
-    name: 'Kendrick Lamar',
-    activities: [
-      {
-        id: 1,
-        type: 'Calisthenics',
-        duration: '30 minutes',
-        date: '2025-02-12'
-      },
-      {
-        id: 2,
-        type: 'Yoga',
-        duration: '45 minutes',
-        date: '2025-03-06'
-      }
-    ]
-  },
-  {
-    id:2,
-    name: 'Billie Eilish',
-    activities: [
-      {
-        id: 1,
-        type: 'Boxing',
-        duration: '30 minutes',
-        date: '2025-03-03'
-      },
-      {
-        id: 2,
-        type: 'Weight lifting',
-        duration: '30 minutes',
-        date: '2025-03-02'
-      }
-    ]
 
-  }
-])
 </script>
 
 <template>
