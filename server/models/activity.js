@@ -1,5 +1,5 @@
-const info = require('./data/activity.json');
-const {CustomError,statusCodes} = require('./error.js');
+const info = require('../data/activity.json').activities;
+const {CustomError,statusCodes} = require('./errors.js');
 async function getActivities() {
     return info;
 }

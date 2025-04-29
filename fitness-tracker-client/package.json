@@ -4,14 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
+
+    "build:client": "npm run build --prefix client",
+    "dev": "nodemon server/index.js --watch server",
+   "build": "npm i --prefix client && npm run build:client" 
+    ,"preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "start": "node server.js"
+
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",

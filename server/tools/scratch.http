@@ -1,6 +1,47 @@
+### Health Check
+GET http://localhost:8000/api/health
 
-###
-    GET https://www.google.com
-###
-    GET https://www.google.com/
-###
+### Test Activities Endpoints
+
+GET http://localhost:8000/api/v1/activities
+Content-Type: application/json
+
+### Create new activity
+POST http://localhost:8000/api/v1/activities
+Content-Type: application/json
+
+{
+  "type": "Running",
+  "duration": "30",
+  "date": "2025-03-10T10:00:00"
+}
+
+### Get specific activity
+GET http://localhost:8000/api/v1/activities/1
+
+### Update activity
+PUT http://localhost:8000/api/v1/activities/1
+Content-Type: application/json
+
+{
+  "type": "Swimming",
+  "duration": "45",
+  "date": "2025-03-10T11:00:00"
+}
+
+### Update activity
+PUT http://localhost:8000/api/v1/activities/1
+
+
+### Delete activity
+DELETE http://localhost:8000/api/v1/activities/1
+
+### Test Friends Endpoints
+
+// Get all friends
+GET http://localhost:8000/api/v1/friends
+Content-Type: application/json
+
+
+### Get friend's activities
+GET http://localhost:8000/api/v1/friends/1/activities
