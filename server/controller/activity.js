@@ -11,6 +11,28 @@ router.get('/', async (req, res, next) => {
         next(err);
     }
 });
+router.get('/search/types', async (req, res, next) => {
+    try {
+        const { query } = req.query;
+        const result = await db.query(
+            'SELECT DISTINCT type FROM activities WHERE type ILIKE $1 ORDER BY type LIMIT 10',
+            [`%${query}%`]
+        );
+        res.json(result.rows.map(row => row.type));
+    } catch (err) {
+        next(err);
+    }
+});
+router.get('/types', async (req, res, next) => {
+    try {
+        const result = await db.query(
+            'SELECT DISTINCT type FROM activities ORDER BY type'
+        );
+        res.json(result.rows.map(row => row.type));
+    } catch (err) {
+        next(err);
+    }
+});
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;

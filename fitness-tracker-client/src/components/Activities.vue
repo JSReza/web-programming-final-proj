@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref,  defineProps, defineEmits, computed  } from 'vue'
-
+import { Autocomplete} from '@oruga-ui/oruga-next';
 interface Activity {
   id: number
   type: string
@@ -19,6 +19,25 @@ const newActivity = ref({
   duration: '',
   date: new Date().toISOString().slice(0, 10)
 })
+const workoutTypes = ref<string[]>([])
+
+const loading = ref(false)
+const searchWorkouts = async (query: string) => {
+  if (!query) return []
+  
+  loading.value = true
+  try {
+    const response = await fetch(`http://localhost:8000/api/v1/activities/search/types?query=${encodeURIComponent(query)}`)
+    const types = await response.json()
+    workoutTypes.value = types
+    return types
+  } catch (error) {
+    console.error('Error fetching workout types:', error)
+    return []
+  } finally {
+    loading.value = false
+  }
+}
 
 const saveWorkout = () => {
   if (!newActivity.value.type || !newActivity.value.duration) {
@@ -38,18 +57,26 @@ const saveWorkout = () => {
 </script>
 
 <template>
-  <div class="box">
+ <div class="box">
     <header class="mb-4">
       <h2 class="title is-4">Add Activity</h2>
     </header>
-
-    <div class="field">
+ <div class="field">
       <label class="label" for="activity">Activity</label>
       <div class="control">
-        <input class="input" type="text" id="activity"placeholder="Enter activity" v-model.trim="newActivity.type"/>
+        <o-autocomplete
+          v-model="newActivity.type"
+          :loading="loading"
+          :data="workoutTypes"
+          placeholder="Enter activity"
+          select="handleAutocompleteSelect"
+          expanded
+          clear-on-select
+          icon="search"
+          icon-pack="fas"
+        />
       </div>
     </div>
-
     <div class="field">
       <label class="label" for="duration">Duration</label>
       <div class="control">
@@ -98,5 +125,16 @@ const saveWorkout = () => {
   transition: transform 0.2s ease;
 }
 
+:deep(.o-autocomplete) {
+  width: 100%;
+}
 
+:deep(.o-autocomplete-item) {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+:deep(.o-autocomplete-item:hover) {
+  background-color: #f5f5f5;
+}
 </style>
