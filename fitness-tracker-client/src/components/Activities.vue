@@ -19,28 +19,24 @@ const newActivity = ref({
   duration: '',
   date: new Date().toISOString().slice(0, 10)
 })
+const workoutTypes = ref<string[]>([])
 
-const workoutTypes = [
-  'Running',
-  'Walking',
-  'Cycling',
-  'Swimming',
-  'Weight Lifting',
-  'Yoga',
-  'HIIT',
-  'Boxing',
-  'Pilates',
-  'Basketball'
-]
-
-const searchWorkouts = (query: string) => {
-  return workoutTypes.filter(type => 
-    type.toLowerCase().includes(query.toLowerCase())
-  )
-}
-
-const handleAutocompleteSelect = (type: string) => {
-  newActivity.value.type = type
+const loading = ref(false)
+const searchWorkouts = async (query: string) => {
+  if (!query) return []
+  
+  loading.value = true
+  try {
+    const response = await fetch(`http://localhost:8000/api/v1/activities/search/types?query=${encodeURIComponent(query)}`)
+    const types = await response.json()
+    workoutTypes.value = types
+    return types
+  } catch (error) {
+    console.error('Error fetching workout types:', error)
+    return []
+  } finally {
+    loading.value = false
+  }
 }
 
 const saveWorkout = () => {
@@ -65,17 +61,19 @@ const saveWorkout = () => {
     <header class="mb-4">
       <h2 class="title is-4">Add Activity</h2>
     </header>
-
-    <div class="field">
+ <div class="field">
       <label class="label" for="activity">Activity</label>
       <div class="control">
         <o-autocomplete
           v-model="newActivity.type"
-          :data="searchWorkouts(newActivity.type)"
+          :loading="loading"
+          :data="workoutTypes"
           placeholder="Enter activity"
-          @select="handleAutocompleteSelect"
-          class="input"
+          select="handleAutocompleteSelect"
           expanded
+          clear-on-select
+          icon="search"
+          icon-pack="fas"
         />
       </div>
     </div>
