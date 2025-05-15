@@ -10,6 +10,7 @@
         "build": "npm run build fitness-tracker-client"
     },
     "dependencies": {
+        "@oruga-ui/oruga-next": "^0.10.5",
         "@supabase/supabase-js": "^2.49.4",
         "bcryptjs": "^2.4.3",
         "buefy": "npm:@ntohq/buefy-next@^0.2.0",

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import Oruga from '@oruga-ui/oruga-next';
+
 import bulma from 'bulma/css/bulma.css'
 import NavBar from './components/NavBar.vue';
 import Statistics from './components/Statistics.vue'

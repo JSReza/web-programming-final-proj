@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref,  defineProps, defineEmits, computed  } from 'vue'
-
+import { Autocomplete} from '@oruga-ui/oruga-next';
 interface Activity {
   id: number
   type: string
@@ -20,6 +20,29 @@ const newActivity = ref({
   date: new Date().toISOString().slice(0, 10)
 })
 
+const workoutTypes = [
+  'Running',
+  'Walking',
+  'Cycling',
+  'Swimming',
+  'Weight Lifting',
+  'Yoga',
+  'HIIT',
+  'Boxing',
+  'Pilates',
+  'Basketball'
+]
+
+const searchWorkouts = (query: string) => {
+  return workoutTypes.filter(type => 
+    type.toLowerCase().includes(query.toLowerCase())
+  )
+}
+
+const handleAutocompleteSelect = (type: string) => {
+  newActivity.value.type = type
+}
+
 const saveWorkout = () => {
   if (!newActivity.value.type || !newActivity.value.duration) {
     return
@@ -38,7 +61,7 @@ const saveWorkout = () => {
 </script>
 
 <template>
-  <div class="box">
+ <div class="box">
     <header class="mb-4">
       <h2 class="title is-4">Add Activity</h2>
     </header>
@@ -46,10 +69,16 @@ const saveWorkout = () => {
     <div class="field">
       <label class="label" for="activity">Activity</label>
       <div class="control">
-        <input class="input" type="text" id="activity"placeholder="Enter activity" v-model.trim="newActivity.type"/>
+        <o-autocomplete
+          v-model="newActivity.type"
+          :data="searchWorkouts(newActivity.type)"
+          placeholder="Enter activity"
+          @select="handleAutocompleteSelect"
+          class="input"
+          expanded
+        />
       </div>
     </div>
-
     <div class="field">
       <label class="label" for="duration">Duration</label>
       <div class="control">
@@ -98,5 +127,16 @@ const saveWorkout = () => {
   transition: transform 0.2s ease;
 }
 
+:deep(.o-autocomplete) {
+  width: 100%;
+}
 
+:deep(.o-autocomplete-item) {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+:deep(.o-autocomplete-item:hover) {
+  background-color: #f5f5f5;
+}
 </style>
